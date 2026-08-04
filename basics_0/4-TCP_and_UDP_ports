@@ -1,3 +1,2 @@
 #!/usr/bin/env bash
-
-powershell.exe -Command "Get-NetTCPConnection -State Listen | ForEach-Object { \$p = Get-Process -Id \$_.OwningProcess -ErrorAction SilentlyContinue; Write-Output ('TCP {0}:{1} LISTENING {2}/{3}' -f \$_.LocalAddress,\$_.LocalPort,\$_.OwningProcess,\$p.ProcessName) }"
+netstat -lpn
