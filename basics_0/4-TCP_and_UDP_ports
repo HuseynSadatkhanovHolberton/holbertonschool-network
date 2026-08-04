@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
-# Display all listening TCP and UDP ports along with their details
-netstat -l --program
+
+netstat -ano | grep LISTENING | while read -r line
+do
+    pid=$(echo "$line" | awk '{print $5}')
+    program=$(tasklist /FI "PID eq $pid" /FO CSV /NH | cut -d',' -f1 | tr -d '"')
+    echo "$line $pid/$program"
+done
